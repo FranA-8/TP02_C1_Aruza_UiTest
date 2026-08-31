@@ -93,6 +93,7 @@ public class UiManager : MonoBehaviour
     private void OnPlayClicked()
     {
         mainMenu.SetActive(false);
+        Time.timeScale = 1;
     }
     private void OnExitClicked()
     {
