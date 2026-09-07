@@ -1,14 +1,11 @@
-using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 
-{
+{   
     [SerializeField] private Movement player1;
     [SerializeField] private Movement player2;
     [SerializeField] private Button btnPlay;

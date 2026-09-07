@@ -1,13 +1,9 @@
-using System;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class CreditsMenu : MonoBehaviour
+public class UiPauseMenuManager : MonoBehaviour
 {
     [SerializeField] private Movement player1;
     [SerializeField] private Movement player2;
@@ -21,10 +17,13 @@ public class CreditsMenu : MonoBehaviour
     [SerializeField] private GameObject pauseSettingsMenu;
     [SerializeField] private GameObject pauseCreditsMenu;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Slider sliderPlayer1SpeedPause;
     [SerializeField] private Slider sliderPlayer2SpeedPause;
     [SerializeField] private TMP_Text p1SpeedTextPause;
     [SerializeField] private TMP_Text p2SpeedTextPause;
+    [SerializeField] private KeyCode pause = KeyCode.Escape;
+    bool isPaused = false;
     private void Awake()
     {
         btnSettingsPause.onClick.AddListener(OnSettingsPauseClicked);
@@ -36,15 +35,7 @@ public class CreditsMenu : MonoBehaviour
         sliderPlayer1SpeedPause.onValueChanged.AddListener(OnPlayer1SpeedChangedPause);
         sliderPlayer2SpeedPause.onValueChanged.AddListener(OnPlayer2SpeedChangedPause);
     }
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
-        
-    }
     private void OnDestroy()
     {
         btnSettingsPause.onClick.RemoveAllListeners();
@@ -58,9 +49,7 @@ public class CreditsMenu : MonoBehaviour
     }
     private void OnContinueClicked()
     {
-        pauseMenu.SetActive(true);
-        pauseSettingsMenu.SetActive(false);
-        pauseCreditsMenu.SetActive(false);
+        pauseMenuPanel.SetActive(false);
     }
     private void OnSettingsPauseClicked()
     {
@@ -70,7 +59,7 @@ public class CreditsMenu : MonoBehaviour
     private void OnExitPauseClicked()
     {
         pauseMenu.SetActive(false);
-        mainMenu.SetActive(true);
+        SceneManager.LoadScene("MainMenu");
     }
     private void OnCreditsPauseClicked()
     {
@@ -96,5 +85,19 @@ public class CreditsMenu : MonoBehaviour
     {
         player2.moveSpeed = value;
         p2SpeedTextPause.text = value.ToString("F2");
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(pause))
+        {
+            pauseMenuPanel.SetActive(true);
+
+            isPaused = !isPaused;
+            pauseMenuPanel.SetActive(isPaused);
+            if (isPaused)
+                Time.timeScale = 0;
+            else
+                Time.timeScale = 1;
+        }
     }
 }
