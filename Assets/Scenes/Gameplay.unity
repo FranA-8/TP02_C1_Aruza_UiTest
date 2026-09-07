@@ -1467,6 +1467,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.37, y: 1.93}
   m_EdgeRadius: 0
+--- !u!212 &714995608 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7148942071957355414, guid: b3b2971df7de96d40978c81e015a93a2, type: 3}
+  m_PrefabInstance: {fileID: 1828822230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &715963927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2251,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.17, y: 3.09}
   m_EdgeRadius: 0
+--- !u!212 &1115374308 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7148942071957355414, guid: b3b2971df7de96d40978c81e015a93a2, type: 3}
+  m_PrefabInstance: {fileID: 7230287295788927907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1177821020
 GameObject:
   m_ObjectHideFlags: 0
@@ -4183,6 +4193,10 @@ PrefabInstance:
       propertyPath: rotateright
       value: 47
       objectReference: {fileID: 0}
+    - target: {fileID: 1353890709043217339, guid: b3b2971df7de96d40978c81e015a93a2, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 714995608}
     - target: {fileID: 2283456056311836329, guid: b3b2971df7de96d40978c81e015a93a2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -5101,6 +5115,10 @@ PrefabInstance:
       propertyPath: movedright
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1353890709043217339, guid: b3b2971df7de96d40978c81e015a93a2, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1115374308}
     - target: {fileID: 2283456056311836329, guid: b3b2971df7de96d40978c81e015a93a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
