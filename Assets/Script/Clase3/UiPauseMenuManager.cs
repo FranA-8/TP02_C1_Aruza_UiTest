@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UiPauseMenuManager : MonoBehaviour
 {
-    [SerializeField] private PhysicsMovement player1;
-    [SerializeField] private PhysicsMovement player2;
+    [SerializeField] private Movement player1;
+    [SerializeField] private Movement player2;
     [SerializeField] private Button btnSettingsPause;
     [SerializeField] private Button btnExitPause;
     [SerializeField] private Button btnCreditsPause;
@@ -20,26 +20,12 @@ public class UiPauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private Slider sliderPlayer1SpeedPause;
     [SerializeField] private Slider sliderPlayer2SpeedPause;
-    [SerializeField] private Slider sliderPlayer1ColorPause;
-    [SerializeField] private Slider sliderPlayer2ColorPause;
-    [SerializeField] private Slider sliderPlayer1HigthPause;
-    [SerializeField] private Slider sliderPlayer2HigthPause;
     [SerializeField] private TMP_Text p1SpeedTextPause;
     [SerializeField] private TMP_Text p2SpeedTextPause;
-    [SerializeField] private TMP_Text p1ColorTextPause;
-    [SerializeField] private TMP_Text p2ColorTextPause;
-    [SerializeField] private TMP_Text p1HigthTextPause;
-    [SerializeField] private TMP_Text p2HigthTextPause;
     [SerializeField] private KeyCode pause = KeyCode.Escape;
-    [SerializeField] private Renderer renderP1;
-    [SerializeField] private Renderer renderP2;
     bool isPaused = false;
-
     private void Awake()
     {
-        renderP1 = GetComponent<Renderer>();
-        renderP2 = GetComponent<Renderer>();
-
         btnSettingsPause.onClick.AddListener(OnSettingsPauseClicked);
         btnExitPause.onClick.AddListener(OnExitPauseClicked);
         btnCreditsPause.onClick.AddListener(OnCreditsPauseClicked);
@@ -48,10 +34,6 @@ public class UiPauseMenuManager : MonoBehaviour
         btnBackCreditsPause.onClick.AddListener(OnBackCreditsPauseClicked);
         sliderPlayer1SpeedPause.onValueChanged.AddListener(OnPlayer1SpeedChangedPause);
         sliderPlayer2SpeedPause.onValueChanged.AddListener(OnPlayer2SpeedChangedPause);
-        sliderPlayer1ColorPause.onValueChanged.AddListener(OnPlayer1ColorChangedPause);
-        sliderPlayer2ColorPause.onValueChanged.AddListener(OnPlayer2ColorChangedPause);
-        sliderPlayer1HigthPause.onValueChanged.AddListener(OnPlayer1HigthChangedPause);
-        sliderPlayer2HigthPause.onValueChanged.AddListener(OnPlayer2HigthChangedPause);
     }
 
     private void OnDestroy()
@@ -64,24 +46,14 @@ public class UiPauseMenuManager : MonoBehaviour
         btnContinue.onClick.RemoveAllListeners();
         sliderPlayer1SpeedPause.onValueChanged.RemoveAllListeners();
         sliderPlayer2SpeedPause.onValueChanged.RemoveAllListeners();
-        sliderPlayer1ColorPause.onValueChanged.RemoveAllListeners();
-        sliderPlayer2ColorPause.onValueChanged.RemoveAllListeners();
-        sliderPlayer1HigthPause.onValueChanged.RemoveAllListeners();
-        sliderPlayer2HigthPause.onValueChanged.RemoveAllListeners();
     }
     private void OnContinueClicked()
     {
         pauseMenuPanel.SetActive(false);
-        isPaused = !isPaused;
-        pauseMenuPanel.SetActive(isPaused);
-        if (isPaused)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
     }
     private void OnSettingsPauseClicked()
     {
-        pauseMenuPanel.SetActive(false);
+        pauseMenu.SetActive(false);
         pauseSettingsMenu.SetActive(true);
     }
     private void OnExitPauseClicked()
@@ -91,18 +63,18 @@ public class UiPauseMenuManager : MonoBehaviour
     }
     private void OnCreditsPauseClicked()
     {
-        pauseMenuPanel.SetActive(false);
+        pauseMenu.SetActive(false);
         pauseCreditsMenu.SetActive(true);
     }
     private void OnBackPauseClicked()
     {
         pauseSettingsMenu.SetActive(false);
-        pauseMenuPanel.SetActive(true);
+        pauseMenu.SetActive(true);
     }
     private void OnBackCreditsPauseClicked()
     {
         pauseCreditsMenu.SetActive(false);
-        pauseMenuPanel.SetActive(true);
+        pauseMenu.SetActive(true);
     }
     private void OnPlayer1SpeedChangedPause(float value)
     {
@@ -113,27 +85,6 @@ public class UiPauseMenuManager : MonoBehaviour
     {
         player2.moveSpeed = value;
         p2SpeedTextPause.text = value.ToString("F2");
-    }
-    private void OnPlayer1ColorChangedPause(float value)
-    {
-        renderP1.material.color = new Color(Random.value, Random.value, Random.value, 1f);
-        p1ColorTextPause.text = value.ToString("F2");
-    }
-    private void OnPlayer2ColorChangedPause(float value)
-    {
-
-        renderP2.material.color = new Color(Random.value, Random.value, Random.value, 1f);
-        p2ColorTextPause.text = value.ToString("F2");
-    }
-    private void OnPlayer1HigthChangedPause(float value)
-    {
-        player1.transform.localScale = new Vector3(player1.transform.localScale.x, value, player1.transform.localScale.z);
-        p1HigthTextPause.text = value.ToString("F2");
-    }
-    private void OnPlayer2HigthChangedPause(float value)
-    {
-        player2.transform.localScale = new Vector3(player2.transform.localScale.x, value, player2.transform.localScale.z);
-        p2HigthTextPause.text = value.ToString("F2");
     }
     private void Update()
     {

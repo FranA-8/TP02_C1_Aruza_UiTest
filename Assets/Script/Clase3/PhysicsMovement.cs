@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PhysicsMovement : MonoBehaviour
@@ -10,23 +9,27 @@ public class PhysicsMovement : MonoBehaviour
     [SerializeField] private KeyCode movedown = KeyCode.S;
     [SerializeField] private KeyCode movedleft = KeyCode.A;
     [SerializeField] private KeyCode movedright = KeyCode.D;
+    [Header("Rotate")]
+    [SerializeField] private KeyCode rotateleft = KeyCode.Q;
+    [SerializeField] private KeyCode rotateright = KeyCode.E;
+    [SerializeField] private float rotate = 10f;
+
+    [Header("Color")]
+    [SerializeField] private KeyCode random = KeyCode.R;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
-
-    internal void SetColor(float value)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal void SetSize(float value)
-    {
-        throw new NotImplementedException();
-    }
-
     private void Awake()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
+    }
+    void Update()
+    {
+        if (Input.GetKeyUp(random))
+        {
+            spriteRenderer.color = new Color(Random.value, Random.value, Random.value, 1f);
+        }
     }
     private void FixedUpdate()
     {
